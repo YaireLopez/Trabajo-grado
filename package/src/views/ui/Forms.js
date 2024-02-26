@@ -25,7 +25,6 @@ function Forms(){
     Axios.post("http://localhost:3001/forms",{
       nombre_proy:nombre_proy,
       administrador_proy:administrador_proy,
-      //Fecha_crea_Proy:Fecha_crea_Proy,
       descripcion_proy:descripcion_proy
     }).then(()=>{
       alert("proyecto creado");
@@ -51,14 +50,14 @@ function Forms(){
                 onChange={(event)=>{
                   setNombre_proy(event.target.value);
                 }}
-                id="nombre_proy" name="nombre_proy" type="textarea" />
+                id="nombre_proy" name="nombre_proy" type="input" />
               </FormGroup>
               <FormGroup>
                 <Label for="administrador_proy">Administrador del proyecto</Label>
                 <Input 
                 onChange={(event)=>{
                   setAdministrador_proy(event.target.value);
-                }}id="administrador_proy" name="administrador_proy" type="textarea" />
+                }}id="administrador_proy" name="administrador_proy" type="input" />
               </FormGroup>
               
               <FormGroup>
@@ -68,7 +67,7 @@ function Forms(){
                   setDescripcion_proy(event.target.value);
                 }} id="descripcion_proy" name="descripcion_proy" type="textarea" />
               </FormGroup>
-              <Button onClick={add} className="mt-2">Submit</Button>
+              <Button onClick={add} className="mt-2">Registrar Proyecto</Button>
             </Form>
           </CardBody>
         </Card>
