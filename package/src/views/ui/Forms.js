@@ -21,6 +21,8 @@ function Forms(){
   //const [Fecha_crea_Proy,setFecha_crea_proy] = useState("");
   const [descripcion_proy,setDescripcion_proy] = useState("");
 
+  const [InfoProyectoList,setInfoProyecto] = useState([]);
+
   const add = ()=>{
     Axios.post("http://localhost:3001/forms",{
       nombre_proy:nombre_proy,
@@ -29,6 +31,12 @@ function Forms(){
     }).then(()=>{
       alert("proyecto creado");
       console.log("se creó");
+    });
+  }
+
+  const getInfoProyecto = ()=>{
+    Axios.get("http://localhost:3001/infoProyecto").then((response)=>{
+      setInfoProyecto(response.data);
     });
   }
 
@@ -66,8 +74,9 @@ function Forms(){
                 onChange={(event)=>{
                   setDescripcion_proy(event.target.value);
                 }} id="descripcion_proy" name="descripcion_proy" type="textarea" />
+                <Button onClick={add} className="mt-2">Registrar Proyecto</Button>
               </FormGroup>
-              <Button onClick={add} className="mt-2">Registrar Proyecto</Button>
+              <Button onClick={add} className="mt-2">Actualizar</Button>
             </Form>
           </CardBody>
         </Card>
