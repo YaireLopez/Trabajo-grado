@@ -1,10 +1,21 @@
 import React from 'react';
 import { Row, Col, CardTitle, Button, CardSubtitle, Card } from 'reactstrap';
 import ComponentCard from '../components/ComponentCard';
+import { useState } from "react";
+import Axios from "axios";
 
 
 const About = () => {
+  const [InfoProyectoList,setInfoProyecto] = useState([]);
+  const getInfoProyecto = ()=>{
+    Axios.get("http://localhost:3001/infoProyecto").then((response)=>{
+      setInfoProyecto(response.data);
+    });
+  }
+  getInfoProyecto();
+  
   const features = [
+    
     {
       title: 'Create React App Based',
       desc: 'Create React App is a tool that gives you a massive head start when building React apps.',
@@ -91,36 +102,42 @@ const About = () => {
         <Card>
           <CardTitle tag="h6" className="border-bottom p-3 mb-0">
             <i className="bi bi-bell me-2"> </i>
-            About Xtreme React
+            Información del Proyecto Actual
           </CardTitle>
-
-
-
-
           <Row className='d-flex'>
             <Col lg="8">
               <div className="mt-5">
                 <ComponentCard
-                  title="Xtreme React Admin Pro Version"
+                
+                  title={
+                    InfoProyectoList.map((val,key)=>{
+                      return <div className="">{val.nombre_proy}</div>
+                    })
+                  }
                   subtitle={
-                    <h5>
-                      5 premium and highly customizable demo variations included in the package, with React
-                      Router 6, Redux Toolkit, Axios nd much more...
-                    </h5>
+                    InfoProyectoList.map((val,key)=>{
+                      return <div className="">{val.administrador_proy}</div>
+                    })
                   }
                 >
                   {/* <Image src='https://www.wrappixel.com/wp-content/uploads/edd/2020/04/xtreme-react-admin-template-y.jpg' alt='pro version image' className='mt-2'/> */}
                   {/* <img src='https://www.wrappixel.com/wp-content/uploads/edd/2020/04/xtreme-react-admin-template-y.jpg' alt='pro version image' className='mt-2' /> */}
 
-                  <img src={`https://www.wrappixel.com/wp-content/uploads/edd/2020/04/xtreme-react-admin-template-y.jpg`} alt="pro version" className="w-100"/>
+                  {/*<img src={`https://www.wrappixel.com/wp-content/uploads/edd/2020/04/xtreme-react-admin-template-y.jpg`} alt="pro version" className="w-100"/>*/}
+                  {/*<Button onClick={getInfoProyecto}>Listar</Button>*/}
+                  {
+                    InfoProyectoList.map((val,key)=>{
+                      return <div className="">{val.descripcion_proy}</div>
+                    })
+                  }
 
                   <div className="mt-3">
                     <Button
                       color="primary"
-                      href="https://www.wrappixel.com/templates/xtreme-react-redux-admin/?ref=33"
+                      href="/#/forms"
                       target="_blank"
                     >
-                      Check Pro Version
+                      Actualizar información del proyecto
                     </Button>
                   </div>
                 </ComponentCard>
