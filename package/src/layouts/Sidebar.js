@@ -4,8 +4,8 @@ import { Link, useLocation } from "react-router-dom";
 
 const navigation = [
   {
-    title: "Inicio",
-    href: "/starter",
+    title: "Proveedores",
+    href: "/forms",
     icon: "bi bi-speedometer2",
   },
   {
@@ -24,7 +24,7 @@ const navigation = [
     icon: "bi bi-hdd-stack",
   },
   {
-    title: "Proveedores",
+    title: "Otra cosa",
     href: "/cards",
     icon: "bi bi-card-text",
   },
@@ -40,7 +40,7 @@ const navigation = [
   },
   {
     title: "Registrar usuario",
-    href: "/forms",
+    href: "/starter",
     icon: "bi bi-textarea-resize",
   },
   {
