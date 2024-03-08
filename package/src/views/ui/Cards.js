@@ -1,276 +1,138 @@
+
+import { useState } from "react";
+import Axios from "axios";
 import {
   Card,
-  CardImg,
-  CardText,
-  CardBody,
-  CardTitle,
-  CardSubtitle,
-  CardGroup,
-  Button,
   Row,
   Col,
+  CardTitle,
+  CardBody,
+  Button,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  Table,
+  //FormText,
 } from "reactstrap";
-import Blog from "../../components/dashboard/Blog";
-import bg1 from "../../assets/images/bg/bg1.jpg";
-import bg2 from "../../assets/images/bg/bg2.jpg";
-import bg3 from "../../assets/images/bg/bg3.jpg";
-import bg4 from "../../assets/images/bg/bg4.jpg";
 
-const BlogData = [
-  {
-    image: bg1,
-    title: "This is simple blog",
-    subtitle: "2 comments, 1 Like",
-    description:
-      "This is a wider card with supporting text below as a natural lead-in to additional content.",
-    btnbg: "primary",
-  },
-  {
-    image: bg2,
-    title: "Lets be simple blog",
-    subtitle: "2 comments, 1 Like",
-    description:
-      "This is a wider card with supporting text below as a natural lead-in to additional content.",
-    btnbg: "primary",
-  },
-  {
-    image: bg3,
-    title: "Don't Lamp blog",
-    subtitle: "2 comments, 1 Like",
-    description:
-      "This is a wider card with supporting text below as a natural lead-in to additional content.",
-    btnbg: "primary",
-  },
-  {
-    image: bg4,
-    title: "Simple is beautiful",
-    subtitle: "2 comments, 1 Like",
-    description:
-      "This is a wider card with supporting text below as a natural lead-in to additional content.",
-    btnbg: "primary",
-  },
-];
 
-const Cards = () => {
+function Tables(){
+  const [nombre_proy,setNombre_proy] = useState("");
+  const [administrador_proy,setAdministrador_proy] = useState("");
+  //const [Fecha_crea_Proy,setFecha_crea_proy] = useState("");
+  const [descripcion_proy,setDescripcion_proy] = useState("");
+
+  const [InfoProyectoList,setInfoProyecto] = useState([]);
+
+  const add = ()=>{
+    Axios.post("http://localhost:3001/forms",{
+      nombre_proy:nombre_proy,
+      administrador_proy:administrador_proy,
+      descripcion_proy:descripcion_proy
+    }).then(()=>{
+      alert("proyecto creado");
+      console.log("se creó");
+    });
+  }
+
+  const getInfoProyecto = ()=>{
+    Axios.get("http://localhost:3001/infoProyecto").then((response)=>{
+      setInfoProyecto(response.data);
+    });
+  }
   return (
-    <div>
+    <Row>
       {/* --------------------------------------------------------------------------------*/}
-      {/* Card-1*/}
+      {/* table-1*/}
       {/* --------------------------------------------------------------------------------*/}
-      <h5 className="mb-3">Basic Card</h5>
-      <Row>
-        {BlogData.map((blg, index) => (
-          <Col sm="6" lg="6" xl="3" key={index}>
-            <Blog
-              image={blg.image}
-              title={blg.title}
-              subtitle={blg.subtitle}
-              text={blg.description}
-              color={blg.btnbg}
-            />
-          </Col>
-        ))}
-      </Row>
+      {/*<Col lg="12">
+        <ProjectTables />
+      </Col>*/}
       {/* --------------------------------------------------------------------------------*/}
-      {/* Card-2*/}
+      {/* table-2*/}
       {/* --------------------------------------------------------------------------------*/}
-      <Row>
-        <h5 className="mb-3 mt-3">Alignment Text</h5>
-        <Col md="6" lg="4">
-          <Card body>
-            <CardTitle tag="h5">Special Title Treatment</CardTitle>
-            <CardText>
-              With supporting text below as a natural lead-in to additional
-              content.
-            </CardText>
-            <div>
-              <Button color="light-warning">Go somewhere</Button>
-            </div>
-          </Card>
-        </Col>
-        <Col md="6" lg="4">
-          <Card body className="text-center">
-            <CardTitle tag="h5">Special Title Treatment</CardTitle>
-            <CardText>
-              With supporting text below as a natural lead-in to additional
-              content.
-            </CardText>
-            <div>
-              <Button color="light-danger">Go somewhere</Button>
-            </div>
-          </Card>
-        </Col>
-        <Col md="6" lg="4">
-          <Card body className="text-end">
-            <CardTitle tag="h5">Special Title Treatment</CardTitle>
-            <CardText>
-              With supporting text below as a natural lead-in to additional
-              content.
-            </CardText>
-            <div>
-              <Button color="light-success">Go somewhere</Button>
-            </div>
-          </Card>
-        </Col>
-      </Row>
-      {/* --------------------------------------------------------------------------------*/}
-      {/* Card-2*/}
-      {/* --------------------------------------------------------------------------------*/}
-      <Row>
-        <h5 className="mb-3 mt-3">Colored Card</h5>
-        <Col md="6" lg="3">
-          <Card body color="primary" inverse>
-            <CardTitle tag="h5">Special Title Treatment</CardTitle>
-            <CardText>
-              With supporting text below as a natural lead-in to additional
-              content.
-            </CardText>
-            <div>
-              <Button>Button</Button>
-            </div>
-          </Card>
-        </Col>
-        <Col md="6" lg="3">
-          <Card body color="info" inverse>
-            <CardTitle tag="h5">Special Title Treatment</CardTitle>
-            <CardText>
-              With supporting text below as a natural lead-in to additional
-              content.
-            </CardText>
-            <div>
-              <Button>Button</Button>
-            </div>
-          </Card>
-        </Col>
-        <Col md="6" lg="3">
-          <Card body color="success" inverse>
-            <CardTitle tag="h5">Special Title Treatment</CardTitle>
-            <CardText>
-              With supporting text below as a natural lead-in to additional
-              content.
-            </CardText>
-            <div>
-              <Button>Button</Button>
-            </div>
-          </Card>
-        </Col>
-        <Col md="6" lg="3">
-          <Card body color="danger" inverse>
-            <CardTitle tag="h5">Special Title Treatment</CardTitle>
-            <CardText>
-              With supporting text below as a natural lead-in to additional
-              content.
-            </CardText>
-            <div>
-              <Button>Button</Button>
-            </div>
-          </Card>
-        </Col>
-        <Col md="6" lg="3">
-          <Card body color="light-warning">
-            <CardTitle tag="h5">Special Title Treatment</CardTitle>
-            <CardText>
-              With supporting text below as a natural lead-in to additional
-              content.
-            </CardText>
-            <div>
-              <Button>Button</Button>
-            </div>
-          </Card>
-        </Col>
-        <Col md="6" lg="3">
-          <Card body color="light-info">
-            <CardTitle tag="h5">Special Title Treatment</CardTitle>
-            <CardText>
-              With supporting text below as a natural lead-in to additional
-              content.
-            </CardText>
-            <div>
-              <Button>Button</Button>
-            </div>
-          </Card>
-        </Col>
-        <Col md="6" lg="3">
-          <Card body color="light-success">
-            <CardTitle tag="h5">Special Title Treatment</CardTitle>
-            <CardText>
-              With supporting text below as a natural lead-in to additional
-              content.
-            </CardText>
-            <div>
-              <Button>Button</Button>
-            </div>
-          </Card>
-        </Col>
-        <Col md="6" lg="3">
-          <Card body color="light-danger">
-            <CardTitle tag="h5">Special Title Treatment</CardTitle>
-            <CardText>
-              With supporting text below as a natural lead-in to additional
-              content.
-            </CardText>
-            <div>
-              <Button>Button</Button>
-            </div>
-          </Card>
-        </Col>
-      </Row>
-      {/* --------------------------------------------------------------------------------*/}
-      {/* Card-Group*/}
-      {/* --------------------------------------------------------------------------------*/}
-      <Row>
-        <h5 className="mb-3 mt-3">Card Group</h5>
-        <Col>
-          <CardGroup>
-            <Card>
-              <CardImg alt="Card image cap" src={bg1} top width="100%" />
-              <CardBody>
-                <CardTitle tag="h5">Card title</CardTitle>
-                <CardSubtitle className="mb-2 text-muted" tag="h6">
-                  Card subtitle
-                </CardSubtitle>
-                <CardText>
-                  This is a wider card with supporting text below as a natural
-                  lead-in to additional content. This content is a little bit
-                  longer.
-                </CardText>
-                <Button>Button</Button>
-              </CardBody>
-            </Card>
-            <Card>
-              <CardImg alt="Card image cap" src={bg2} top width="100%" />
-              <CardBody>
-                <CardTitle tag="h5">Card title</CardTitle>
-                <CardSubtitle className="mb-2 text-muted" tag="h6">
-                  Card subtitle
-                </CardSubtitle>
-                <CardText>
-                  This card has supporting text below as a natural lead-in to
-                  additional content.
-                </CardText>
-                <Button>Button</Button>
-              </CardBody>
-            </Card>
-            <Card>
-              <CardImg alt="Card image cap" src={bg3} top width="100%" />
-              <CardBody>
-                <CardTitle tag="h5">Card title</CardTitle>
-                <CardSubtitle className="mb-2 text-muted" tag="h6">
-                  Card subtitle
-                </CardSubtitle>
-                <CardText>
-                  This is a wider card with supporting text below as a natural
-                  lead-in to additional content. This card has even longer
-                  content than the first to show that equal height action.
-                </CardText>
-                <Button>Button</Button>
-              </CardBody>
-            </Card>
-          </CardGroup>
-        </Col>
-      </Row>
+      <div className="Forms">
+      <div className="Administrar proyecto actual">
+    <Row>
+      <Col>
+        <Card>
+          <CardTitle tag="h6" className="border-bottom p-3 mb-0">
+            <i className="bi bi-bell me-2"> </i>
+            Registrar proveedor
+          </CardTitle>
+          <CardBody>
+            <Form>
+              <FormGroup>
+                <Label for="nombre_proy">Nombre</Label>
+                <Input
+                onChange={(event)=>{
+                  setNombre_proy(event.target.value);
+                }}
+                id="nombre_proy" name="nombre_proy" placeholder="Nombre del proveedor a registrar" type="input" />
+              </FormGroup>
+              <FormGroup>
+                <Label for="administrador_proy">Administrador del proyecto</Label>
+                <Input 
+                onChange={(event)=>{
+                  setAdministrador_proy(event.target.value);
+                }}id="administrador_proy" name="administrador_proy" type="input" />
+              </FormGroup>
+              
+              <FormGroup>
+                <Label for="descripcion_proy">Descripcion del proyecto</Label>
+                <Input
+                onChange={(event)=>{
+                  setDescripcion_proy(event.target.value);
+                }} id="descripcion_proy" name="descripcion_proy" type="textarea" />
+                <Button onClick={add} className="btnRegistrar">Registrar Proyecto</Button>
+              </FormGroup>
+            </Form>
+          </CardBody>
+        </Card>
+      </Col>
+    </Row>
     </div>
+    </div>
+      <Col lg="12">
+        <Card>
+          <CardTitle tag="h6" className="border-bottom p-3 mb-0">
+            <i className="bi bi-card-text me-2"> </i>
+            Directorio de Proveedores
+          </CardTitle>
+          <CardBody className="">
+            <Table bordered>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Nombre</th>
+                  <th>Apellido</th>
+                  <th>Telefono 1</th>
+                  <th>Telefono 2</th>
+                  <th>Direccion</th>
+                  <th>Ciudad</th>
+                  <th>Descripcion</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>Mark</td>
+                  <td>Otto</td>
+                  <td>@mdo</td>
+                  <td>Mark</td>
+                  <td>Otto</td>
+                  <td>@mdo</td>
+                  <td>@mdo</td>
+                </tr>
+                
+              </tbody>
+            </Table>
+          </CardBody>
+        </Card>
+      </Col>
+    </Row>
   );
 };
 
-export default Cards;
+export default Tables;
