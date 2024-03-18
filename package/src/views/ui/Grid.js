@@ -30,17 +30,19 @@ const Grid = () => {
   const [descripcion_prod,setdescripcion_prod] = useState("");
   const [id_Producto,setid_Producto] = useState();
   const [editar,setEditar] = useState(false);
+
   const getInfoProducto = ()=>{
     Axios.get("http://localhost:3001/infoProducto").then((response)=>{
       setInfoProducto(response.data);
     });
   }
+
   const limpiarCampos=()=>{
     setfecha_prod("");
     setnombre_prod("");
     setdescripcion_prod("")
-    setEditar(false);
-  }
+    setEditar(false);}
+
   const add = ()=>{
     Axios.post("http://localhost:3001/grid",{
       fecha_prod:fecha_prod,
@@ -64,6 +66,7 @@ const Grid = () => {
       });
     });
   }
+
   const update = ()=>{
     Axios.put("http://localhost:3001/updateProducto",{
       id_Producto:id_Producto,
@@ -88,6 +91,8 @@ const Grid = () => {
       });
     });
   }
+
+ 
   getInfoProducto();
   const deleteProducto = (val)=>{
     swalWithBootstrapButtons.fire({
@@ -131,6 +136,7 @@ const Grid = () => {
     
   }
 
+
   const editarProducto =(val)=>{
     setEditar(true);
     setfecha_prod(val.fecha_prod);
@@ -138,6 +144,7 @@ const Grid = () => {
     setdescripcion_prod(val.descripcion_prod);
     setid_Producto(val.id_Producto);
   }
+
   return ( 
     <div className="Forms">
       <div className="Registrar Producto">
@@ -227,6 +234,8 @@ const Grid = () => {
             </Table>                    
           </CardBody>
                   </Card>
+
+
       </Col>
     </Row>
     </div>

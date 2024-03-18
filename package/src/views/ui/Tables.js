@@ -13,6 +13,7 @@ import {
   Input,
   //FormText,
 } from "reactstrap";
+
 const swalWithBootstrapButtons = Swal.mixin({
   customClass: {
     confirmButton: "btn btn-success",
@@ -23,22 +24,11 @@ const swalWithBootstrapButtons = Swal.mixin({
 
 
 const Tables = () => {
-  
   const [InfoCatMovimientoList,setInfoCatMovimiento] = useState([]);
   const [nom_CatMov,setnom_CatMov] = useState("");
   const [descripcion_CatMov,setdescripcion_CatMov] = useState("");
   const [id_CatMov,setid_CatMov] = useState();
-  const [InfoMovimientoList,setInfoMovimiento] = useState([]);
-  const [id_producto_Mov,setid_producto_Mov] = useState();
-  const [id_CatMov_Mov,setid_CatMov_Mov] = useState();
-  const [fecha_Mov,setfecha_Mov] = useState("");
-  const [cant_Mov,setcant_Mov] = useState();
-  const [val_unidad_Mov,setval_unidad_Mov] = useState();
-  const [val_Total_Mov,setval_Total_Mov] = useState();
-  const [id_prov_Mov,setid_prov_Mov] = useState();
-  const [id_proy_Mov,setid_proy_Mov] = useState();
-  const [id_usurio_Mov,setid_usurio_Mov] = useState();
-  const [id_Movimiento,setid_Movimiento] = useState();
+
   
   const [editar,setEditar] = useState(false);
   const getInfoCatMovimiento = ()=>{
@@ -229,20 +219,7 @@ const Tables = () => {
               </tbody>
             </Table>                    
           </CardBody>
-                  </Card>
-                 <form>
-                 {
-                    InfoCatMovimientoList.map((val,key)=>{
-                      return <form>
-                        <select>
-                        <option value="1">{val.nom_CatMov}</option>
-                      </select>
-                      </form>
-                      
-
-                    })
-                    }
-                 </form>
+                  </Card>                    
       </Col>
     </Row>
     </div>
