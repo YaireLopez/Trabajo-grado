@@ -70,13 +70,11 @@ const Header = () => {
           </NavItem>
           <UncontrolledDropdown inNavbar nav>
             <DropdownToggle caret nav>
-              Administrar
+              Aun no se
             </DropdownToggle>
             <DropdownMenu end>
               <DropdownItem>Opcion 1</DropdownItem>
               <DropdownItem>Opcion 2</DropdownItem>
-              <DropdownItem divider />
-              <DropdownItem>Cerrar Sesión</DropdownItem>
             </DropdownMenu>
           </UncontrolledDropdown>
         </Nav>
@@ -91,12 +89,10 @@ const Header = () => {
           </DropdownToggle>
           <DropdownMenu>
             <DropdownItem header>Info</DropdownItem>
-            <DropdownItem>My Account</DropdownItem>
-            <DropdownItem>Edit Profile</DropdownItem>
+            <DropdownItem>Mi Cuenta</DropdownItem>
+            <DropdownItem>Editar Perfil</DropdownItem>
             <DropdownItem divider />
-            <DropdownItem>My Balance</DropdownItem>
-            <DropdownItem>Inbox</DropdownItem>
-            <DropdownItem>Logout</DropdownItem>
+            <DropdownItem>Cerrar sesión</DropdownItem>
           </DropdownMenu>
         </Dropdown>
       </Collapse>

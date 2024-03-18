@@ -4,29 +4,19 @@ import { Link, useLocation } from "react-router-dom";
 
 const navigation = [
   {
+    title: "Registrar usuario",
+    href: "/signuser",
+    icon: "bi bi-textarea-resize",
+  },
+  {
     title: "Proveedores",
     href: "/forms",
     icon: "bi bi-speedometer2",
   },
   {
-    title: "NO SE X2",
+    title: "Empleados",
     href: "/alerts",
     icon: "bi bi-bell",
-  },
-  {
-    title: "Simulador",
-    href: "/badges",
-    icon: "bi bi-patch-check",
-  },
-  {
-    title: "Inventario",
-    href: "/buttons",
-    icon: "bi bi-hdd-stack",
-  },
-  {
-    title: "Otra cosa",
-    href: "/cards",
-    icon: "bi bi-card-text",
   },
   {
     title: "Productos",
@@ -34,23 +24,34 @@ const navigation = [
     icon: "bi bi-columns",
   },
   {
-    title: "Movimientos",
+    title: "Categorías",
     href: "/table",
     icon: "bi bi-layout-split",
   },
   {
-    title: "Registrar usuario",
-    href: "/starter",
-    icon: "bi bi-textarea-resize",
+    title: "Movimientos",
+    href: "/cards",
+    icon: "bi bi-card-text",
   },
   {
-    title: "Categorías",
+    title: "Inventario",
+    href: "/buttons",
+    icon: "bi bi-hdd-stack",
+  },
+
+  {
+    title: "Limitación usuarios",
     href: "/breadcrumbs",
     icon: "bi bi-link",
   },
   {
+    title: "Simulador",
+    href: "/badges",
+    icon: "bi bi-patch-check",
+  },
+  {
     title: "Finalizar proyecto",
-    href: "/about",
+    href: "/endproject",
     icon: "bi bi-people",
   },
 ];
