@@ -3,57 +3,38 @@ import Logo from "./Logo";
 import { Link, useLocation } from "react-router-dom";
 
 const navigation = [
-  {
-    title: "Registrar usuario",
-    href: "/signuser",
-    icon: "bi bi-textarea-resize",
-  },
+  
   {
     title: "Proveedores",
-    href: "/forms",
+    href: "/Proveedor",
     icon: "bi bi-speedometer2",
   },
   {
-    title: "Empleados",
-    href: "/alerts",
+    title: "Personal",
+    href: "/Personal",
     icon: "bi bi-bell",
   },
   {
     title: "Productos",
-    href: "/grid",
+    href: "/Producto",
     icon: "bi bi-columns",
   },
   {
     title: "Categorías",
-    href: "/table",
+    href: "/CatMovimiento",
     icon: "bi bi-layout-split",
   },
   {
     title: "Movimientos",
-    href: "/cards",
+    href: "/Movimiento",
     icon: "bi bi-card-text",
   },
   {
     title: "Inventario",
-    href: "/buttons",
+    href: "/Inventario",
     icon: "bi bi-hdd-stack",
   },
 
-  {
-    title: "Limitación usuarios",
-    href: "/breadcrumbs",
-    icon: "bi bi-link",
-  },
-  {
-    title: "Simulador",
-    href: "/badges",
-    icon: "bi bi-patch-check",
-  },
-  {
-    title: "Finalizar proyecto",
-    href: "/endproject",
-    icon: "bi bi-people",
-  },
 ];
 
 const Sidebar = () => {

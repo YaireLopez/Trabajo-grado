@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
-//import useFetch from "react-fetch-hook";
 import { Row, Col, CardTitle, Button, Card } from 'reactstrap';
 import { useState } from "react";
-import Axios from "axios";
 import Swal from 'sweetalert2'
 import {
   ButtonGroup,
@@ -116,7 +114,11 @@ const Personal = () => {
       reverseButtons: true
     }).then((result) => {
       if (result.isConfirmed) {
-        Axios.delete(`http://localhost:3001/deletePersonal/${val.id_Personal}`).then(()=>{
+        fetch(`http://localhost:3001/deletePersonal/${val.id_Personal}`,{
+          method: "DELETE",
+        })
+        .then(response => response.json())
+        .then(()=>{
         limpiarCampos();
         swalWithBootstrapButtons.fire({
           title: "¡Eliminado!",

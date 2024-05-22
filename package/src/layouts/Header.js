@@ -6,7 +6,6 @@ import {
   Nav,
   NavItem,
   NavbarBrand,
-  UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
@@ -59,24 +58,16 @@ const Header = () => {
       <Collapse navbar isOpen={isOpen}>
         <Nav className="me-auto" navbar>
           <NavItem>
-            <Link to="/starter" className="nav-link">
+            <Link to="/inicio" className="nav-link">
               Inicio
             </Link>
           </NavItem>
           <NavItem>
-            <Link to="/about" className="nav-link">
+            <Link to="/proyecto" className="nav-link">
               Acerca del proyecto
             </Link>
           </NavItem>
-          <UncontrolledDropdown inNavbar nav>
-            <DropdownToggle caret nav>
-              Aun no se
-            </DropdownToggle>
-            <DropdownMenu end>
-              <DropdownItem>Opcion 1</DropdownItem>
-              <DropdownItem>Opcion 2</DropdownItem>
-            </DropdownMenu>
-          </UncontrolledDropdown>
+          
         </Nav>
         <Dropdown isOpen={dropdownOpen} toggle={toggle}>
           <DropdownToggle color="primary">

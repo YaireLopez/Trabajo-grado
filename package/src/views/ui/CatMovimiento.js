@@ -13,7 +13,7 @@ import {
   Input,
   //FormText,
 } from "reactstrap";
-
+//Se deja el delete con Axios para explicarlo en el manual
 const swalWithBootstrapButtons = Swal.mixin({
   customClass: {
     confirmButton: "btn btn-success",

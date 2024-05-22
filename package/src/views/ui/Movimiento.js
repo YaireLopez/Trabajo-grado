@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { Row, Col, CardTitle, Button, Card } from 'reactstrap';
 import { useState } from "react";
-import Axios from "axios";
 import Swal from 'sweetalert2'
 import {
   ButtonGroup,
@@ -32,7 +31,7 @@ const Movimiento = () => {
  const [InfoProveedorList,setInfoProveedor] = useState([]);
 
   const [InfoMovimientoList,setInfoMovimiento] = useState([]);
-  const [id_producto_Mov,setid_producto_Mov] = useState();
+  const [nombre_prod_Mov,setnombre_prod_Mov] = useState();
   const [id_CatMov_Mov,setid_CatMov_Mov] = useState();
   const [id_TipoMov_Mov,setid_TipoMov_Mov] = useState();
   const [fecha_Mov,setfecha_Mov] = useState("");
@@ -111,7 +110,7 @@ const Movimiento = () => {
   const limpiarCampos=()=>{
     setid_TipoMov_Mov("");
     setid_CatMov_Mov("");
-    setid_producto_Mov("");
+    setnombre_prod_Mov("");
     setid_prov_Mov("");
     setid_personalMov("");
     setcomentarioMov("");
@@ -128,7 +127,7 @@ const Movimiento = () => {
       body: JSON.stringify({
         id_TipoMov_Mov,
         id_CatMov_Mov,
-        id_producto_Mov,
+        nombre_prod_Mov,
         id_prov_Mov,
         id_personalMov,
         fecha_Mov,
@@ -158,12 +157,20 @@ const Movimiento = () => {
     });
   }
 
-  const update = id =>{
-    const movimiento = InfoMovimientoList.find(movimiento => movimiento.id_Movimiento === id)
-
-    fetch(`http://localhost:3001/infoMovimiento/${id_Movimiento}`,{
+  const update = ()=>{
+    fetch("http://localhost:3001/updateMovimiento",{
       method: "PUT",
-      body: JSON.stringify(movimiento),
+      body: JSON.stringify({
+        id_Movimiento,
+        fecha_Mov,
+        cant_Mov,
+        val_unidad_Mov,
+        val_Total_Mov,
+        comentarioMov,
+        id_TipoMov_Mov,
+        id_CatMov_Mov,
+        nombre_prod_Mov, 
+      }),
       headers: {
         "Content-type": "application/json; charset=UTF-8",
       },
@@ -196,7 +203,11 @@ const Movimiento = () => {
       reverseButtons: true
     }).then((result) => {
       if (result.isConfirmed) {
-        Axios.delete(`http://localhost:3001/deleteMovimiento/${val.id_Movimiento}`).then(()=>{
+        fetch(`http://localhost:3001/deleteMovimiento/${val.id_Movimiento}`,{
+          method: "DELETE",
+        })
+        .then(response => response.json())
+        .then(()=>{
         limpiarCampos();
         swalWithBootstrapButtons.fire({
           title: "¡Eliminado!",
@@ -225,7 +236,7 @@ const Movimiento = () => {
     });
     
   }
-
+/*
   const editarMovimiento =(val)=>{
     setEditar(true);
     setid_TipoMov_Mov(val.id_TipoMov_Mov);
@@ -240,7 +251,7 @@ const Movimiento = () => {
     setval_Total_Mov(val.val_Total_Mov);
     setid_Movimiento(val.id_Movimiento);
   }
-  
+  */
   return ( 
     <div className="Forms">
       <div className="Registrar Movimiento">
@@ -260,13 +271,12 @@ const Movimiento = () => {
                 }}>
                   {
                     InfoTipoMovimientoList.map(option=>(
-                      <option value={option.id_TipoMov}>{option.nom_TipoMov}-{option.descripcion_TipoMov}</option>
+                      <option value={option.id_TipoMov}>{option.descripcion_TipoMov}</option>
                     ))
                   }
                   </select>
-            </FormGroup>}  
-            
-             <FormGroup>
+            </FormGroup>} 
+            { id_TipoMov_Mov && <FormGroup>
                 <Label for="id_CatMov_Mov">Categoría del movimiento</Label>
                 <select value={InfoCatMovimientoList.id_CatMov} onChange={(event)=>{
                   setid_CatMov_Mov(event.target.value);
@@ -277,20 +287,20 @@ const Movimiento = () => {
                     ))
                   }
                   </select>
-            </FormGroup> 
+            </FormGroup>}
             
-            { <FormGroup>
-              <Label for="id_producto_Mov">Elija el Producto relacionado</Label>
-              <select value={id_producto_Mov} onChange={(event)=>{
-                setid_producto_Mov(event.target.value);
+            { id_CatMov_Mov === '2' && id_TipoMov_Mov === '3'?<FormGroup><FormGroup>
+              <Label for="nombre_prod_Mov">Elija el Producto relacionado</Label>
+              <select value={nombre_prod_Mov} onChange={(event)=>{
+                setnombre_prod_Mov(event.target.value);
               }}>
                 {
                   InfoProductoList.map(option=>(
-                    <option key={option.id_Producto} value={option.id_Producto}>{option.nombre_prod}-{option.descripcion_prod}</option>
+                    <option key={option.nombre_prod} value={option.nombre_prod}>{option.nombre_prod}-{option.descripcion_prod}</option>
                   ))
                 }
-                </select>
-                <Label for="id_prov_Mov">Elija el Proveedor</Label>
+                </select></FormGroup>
+                 <Label for="id_prov_Mov">Elija el Proveedor</Label>
               <select value={id_prov_Mov} onChange={(event)=>{
                 setid_prov_Mov(event.target.value);
               }}>
@@ -300,31 +310,7 @@ const Movimiento = () => {
                   ))
                 }
                 </select>
-          </FormGroup>}
-            
-            
-          {<FormGroup>
-              <Label for="id_personalMov">Elija a la persona</Label>
-              <select value={id_personalMov} onChange={(event)=>{
-                setid_personalMov(event.target.value);
-              }}>
-                {
-                  InfoPersonalList.map(option=>(
-                    <option key={option.id_Personal} value={option.id_Personal}>{option.Nombre_Pers}-{option.Cargo}</option>
-                  ))
-                }
-                </select>
-          </FormGroup>}
-           
-                 
-            <FormGroup>
-                <Label for="fecha_Mov">Fecha del movimiento</Label>
-                <Input 
-                onChange={(event)=>{
-                  setfecha_Mov(event.target.value);
-                }}id="fecha_Mov" value={fecha_Mov} name="fecha_Mov" type="date" />
-            </FormGroup>
-              <FormGroup>
+                <FormGroup>
                 <Label for="cant_Mov">Cantidad de unidades</Label>
                 <Input
                 onChange={(event)=>{
@@ -348,19 +334,175 @@ const Movimiento = () => {
                 }}
                 id="val_Total_Mov" value={val_Total_Mov} name="val_Total_Mov" type="number" />
               </FormGroup>
+          </FormGroup>:id_CatMov_Mov === '2' && id_TipoMov_Mov === '2'?<FormGroup><FormGroup>
+              <Label for="nombre_prod_Mov">Elija el Producto a restar del inventario</Label>
+              <select value={nombre_prod_Mov} onChange={(event)=>{
+                setnombre_prod_Mov(event.target.value);
+              }}>
+                {
+                  InfoProductoList.map(option=>(
+                    <option key={option.nombre_prod} value={option.nombre_prod}>{option.nombre_prod}-{option.descripcion_prod}</option>
+                  ))
+                }
+                </select></FormGroup>
+                 
+                <FormGroup>
+                <Label for="cant_Mov">Cantidad de unidades usadas</Label>
+                <Input
+                onChange={(event)=>{
+                  setcant_Mov(event.target.value);
+                }}
+                id="cant_Mov" value={cant_Mov} name="cant_Mov" type="number" />
+              </FormGroup>
+              
+          </FormGroup>: id_CatMov_Mov === '2' && id_TipoMov_Mov === '4'?<FormGroup><FormGroup>
+              <Label for="nombre_prod_Mov">Elija el producto vendido</Label>
+              <select value={nombre_prod_Mov} onChange={(event)=>{
+                setnombre_prod_Mov(event.target.value);
+              }}>
+                {
+                  InfoProductoList.map(option=>(
+                    <option key={option.nombre_prod} value={option.nombre_prod}>{option.nombre_prod}-{option.descripcion_prod}</option>
+                  ))
+                }
+                </select></FormGroup>
+                <Label for="id_personalMov">Elija a quien se lo vendió, si no está, primero registrelo en personal</Label>
+              <select value={id_personalMov} onChange={(event)=>{
+                setid_personalMov(event.target.value);
+              }}>
+                {
+                  InfoPersonalList.map(option=>(
+                    <option key={option.id_Personal} value={option.id_Personal}>{option.Nombre_Pers}-{option.Cargo}</option>
+                  ))
+                }
+                </select>
+                <FormGroup>
+                <Label for="cant_Mov">Cantidad de unidades</Label>
+                <Input
+                onChange={(event)=>{
+                  setcant_Mov(event.target.value);
+                }}
+                id="cant_Mov" value={cant_Mov} name="cant_Mov" type="number" />
+              </FormGroup>
               <FormGroup>
-            	  <Label for="comentarioMov">Deje un comentario acerca del movimiento</Label>
+                <Label for="val_unidad_Mov">Valor por unidad</Label>
+                <Input
+                onChange={(event)=>{
+                  setval_unidad_Mov(event.target.value);
+                }}
+                id="val_unidad_Mov" value={val_unidad_Mov} name="val_unidad_Mov" type="number" />
+              </FormGroup>
+              <FormGroup>
+                <Label for="val_Total_Mov">Valor Total del movimiento</Label>
+                <Input
+                onChange={(event)=>{
+                  setval_Total_Mov(event.target.value);
+                }}
+                id="val_Total_Mov" value={val_Total_Mov} name="val_Total_Mov" type="number" />
+              </FormGroup>
+          </FormGroup>
+          : id_CatMov_Mov === '3' ? <FormGroup>
+              <Label for="id_personalMov">Elija al empleado</Label>
+              <select value={id_personalMov} onChange={(event)=>{
+                setid_personalMov(event.target.value);
+              }}>
+                {
+                  InfoPersonalList.map(option=>(
+                    <option key={option.id_Personal} value={option.id_Personal}>{option.Nombre_Pers}-{option.Cargo}</option>
+                  ))
+                }
+                </select>
+                <FormGroup>
+                <Label for="cant_Mov">Cantidad</Label>
+                <Input
+                onChange={(event)=>{
+                  setcant_Mov(event.target.value);
+                }}
+                id="cant_Mov" value={cant_Mov} name="cant_Mov" type="number" />
+              </FormGroup>
+              <FormGroup>
+                <Label for="val_unidad_Mov">Valor por empleado</Label>
+                <Input
+                onChange={(event)=>{
+                  setval_unidad_Mov(event.target.value);
+                }}
+                id="val_unidad_Mov" value={val_unidad_Mov} name="val_unidad_Mov" type="number" />
+              </FormGroup>
+              <FormGroup>
+                <Label for="val_Total_Mov">Valor total</Label>
+                <Input
+                onChange={(event)=>{
+                  setval_Total_Mov(event.target.value);
+                }}
+                id="val_Total_Mov" value={val_Total_Mov} name="val_Total_Mov" type="number" />
+              </FormGroup>
+          </FormGroup> : id_CatMov_Mov === '4' ? <FormGroup>
+          <FormGroup>
+                <Label for="cant_Mov">Cantidad de unidades</Label>
+                <Input
+                onChange={(event)=>{
+                  setcant_Mov(event.target.value);
+                }}
+                id="cant_Mov" value={cant_Mov} name="cant_Mov" type="number" />
+              </FormGroup>
+              <FormGroup>
+                <Label for="val_unidad_Mov">Valor por unidad</Label>
+                <Input
+                onChange={(event)=>{
+                  setval_unidad_Mov(event.target.value);
+                }}
+                id="val_unidad_Mov" value={val_unidad_Mov} name="val_unidad_Mov" type="number" />
+              </FormGroup>
+              <FormGroup>
+                <Label for="val_Total_Mov">Valor Total del movimiento</Label>
+                <Input
+                onChange={(event)=>{
+                  setval_Total_Mov(event.target.value);
+                }}
+                id="val_Total_Mov" value={val_Total_Mov} name="val_Total_Mov" type="number" />
+              </FormGroup>
+              <Label for="id_personalMov">Elija a la persona encargada</Label>
+              <select value={id_personalMov} onChange={(event)=>{
+                setid_personalMov(event.target.value);
+              }}>
+                {
+                  InfoPersonalList.map(option=>(
+                    <option key={option.id_Personal} value={option.id_Personal}>{option.Nombre_Pers}-{option.Cargo}</option>
+                  ))
+                }
+                </select>
+          </FormGroup> : <FormGroup>
+            	 
+                <Label for="val_Total_Mov">Valor Total del movimiento</Label>
+                <Input
+                onChange={(event)=>{
+                  setval_Total_Mov(event.target.value);
+                }}
+                id="val_Total_Mov" value={val_Total_Mov} name="val_Total_Mov" type="number" />
+              </FormGroup>
+          }
+            <FormGroup>
+                <Label for="fecha_Mov">Fecha del movimiento</Label>
+                <Input 
+                onChange={(event)=>{
+                  setfecha_Mov(event.target.value);
+                }}id="fecha_Mov" value={fecha_Mov} name="fecha_Mov" type="date" />
+            </FormGroup>
+            <FormGroup><Label for="comentarioMov">Deje un comentario acerca del movimiento</Label>
                 <Input
                 onChange={(event)=>{
                   setcomentarioMov(event.target.value);
                 }}
-                id="comentarioMov" value={comentarioMov} name="comentarioMov" type="textarea" />              
-          </FormGroup>
+                id="comentarioMov" value={comentarioMov} name="comentarioMov" type="textarea" /></FormGroup>
+ 
               
               {
-                editar?
+                
+                editar? 
+                
                 <div>
-                  <Button onClick={update} color="success" className="btnRegistrar m-2">Actualizar Movimiento</Button>
+                  <Button onClick={update} color="success" className="btnRegistrar m-2">Actualizar Movimiento</Button> 
+                  
                   <Button onClick={limpiarCampos} color="secondary" className="btnCancelar m-2">Cancelar</Button>
                 </div>
                 :<Button onClick={add} color="primary" className="btnRegistrar">Registrar Movimiento</Button>
@@ -375,6 +517,7 @@ const Movimiento = () => {
                 <tr>
                   <th>ID</th>
                   <th>Fecha del movimiento</th>
+                  <th>Concepto</th>
                   <th>Cantidad de unidades</th>
                   <th>Valor por unidad</th>
                   <th>Valor total</th>
@@ -387,17 +530,13 @@ const Movimiento = () => {
                       return <tr key={val.id_Movimiento}>
                       <th>{val.id_Movimiento}</th>
                       <td>{val.fecha_Mov}</td>
+                      <td>{val.comentarioMov}</td>
                       <td>{val.cant_Mov}</td>
                       <td>{val.val_unidad_Mov}</td>
                       <td>{val.val_Total_Mov}</td>
                       <td>
                       <ButtonGroup>
-                      <Button
-                  color="success"
-                  onClick={()=>{
-                    editarMovimiento(val);
-                  }}
-                >Editar</Button>
+                      
                 <Button
                   color="danger"
                   onClick={() =>{
@@ -406,32 +545,6 @@ const Movimiento = () => {
                 >Eliminar</Button>
               </ButtonGroup>
                       </td>
-                    </tr>
-                    })
-                    }
-                
-              </tbody>
-            </Table>                    
-          </CardBody>
-                  </Card>
-                  <Card>
-                    <CardBody>
-                    <Table bordered striped>
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Nombre de la categoría</th>
-                  <th>Descripcion de la categoría</th>
-                </tr>
-              </thead>
-              <tbody>
-              {
-                    InfoCatMovimientoList.map((val,key)=>{
-                      return <tr key={val.id_CatMov}>
-                      <th>{val.id_CatMov}</th>
-                      <td>{val.nom_CatMov}</td>
-                      <td>{val.descripcion_CatMov}</td>
-                      
                     </tr>
                     })
                     }

@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { Row, Col, CardTitle, Button, Card } from 'reactstrap';
 import { useState } from "react";
-import Axios from "axios";
 import Swal from 'sweetalert2'
 import {
   ButtonGroup,
@@ -121,7 +120,11 @@ const Producto = () => {
       reverseButtons: true
     }).then((result) => {
       if (result.isConfirmed) {
-        Axios.delete(`http://localhost:3001/deleteProducto/${val.id_Producto}`).then(()=>{
+        fetch(`http://localhost:3001/deleteProducto/${val.id_Producto}`,{
+          method: "DELETE",
+        })
+        .then(response => response.json())
+        .then(()=>{
   
         limpiarCampos();
         swalWithBootstrapButtons.fire({

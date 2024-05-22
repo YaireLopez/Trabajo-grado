@@ -3,7 +3,7 @@ import { Row, Col, CardTitle, Button, Card } from 'reactstrap';
 import ComponentCard from '../components/ComponentCard';
 import { useState } from "react";
 import { useEffect } from 'react';
-import Axios from "axios";
+
 import Swal from 'sweetalert2'
 import {
   Table,
@@ -44,12 +44,18 @@ const Proyecto = () => {
     setEditar(false);
   }
   const update = ()=>{
-    Axios.put("http://localhost:3001/updateProyecto",{
-      id_Proyecto:id_Proyecto,
-      nombre_proy:nombre_proy,
-      administrador_proy:administrador_proy,
-      Fecha_crea_Proy:Fecha_crea_Proy,
-      descripcion_proy:descripcion_proy
+  fetch("http://localhost:3001/updateProyecto",{
+    method: "PUT",
+    body: JSON.stringify({
+      id_Proyecto,
+      nombre_proy,
+      administrador_proy,
+      Fecha_crea_Proy,
+      descripcion_proy,
+    }),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+    },
     }).then(()=>{
       limpiarCampos();
       Swal.fire({
@@ -119,7 +125,7 @@ const Proyecto = () => {
         <Card>
           <CardTitle tag="h6" className="border-bottom p-3 mb-0">
             <i className="bi bi-bell me-2"> </i>
-            Registrar Proyecto
+            Información del Proyecto
           </CardTitle>
           <CardBody>
             <Form>
