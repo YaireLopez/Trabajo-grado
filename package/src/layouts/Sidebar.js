@@ -73,14 +73,7 @@ const Sidebar = () => {
               </Link>
             </NavItem>
           ))}
-          <Button
-            color="danger"
-            tag="a"
-            target="_blank"
-            className="mt-3"
-          >
-            Cerrar sesión
-          </Button>
+          
         </Nav>
       </div>
     </div>
