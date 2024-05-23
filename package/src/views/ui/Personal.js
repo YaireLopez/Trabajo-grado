@@ -172,7 +172,7 @@ const Personal = () => {
                 <Input 
                 onChange={(event)=>{
                   setNombre_Pers(event.target.value);
-                }}id="Nombre_Pers" value={Nombre_Pers} name="Nombre_Pers" type="input" />
+                }}id="Nombre_Pers" value={Nombre_Pers} name="Nombre_Pers" type="input" placeholder="Ingrese el nombre del empleado"/>
               </FormGroup>
               <FormGroup>
                 <Label for="Cargo">Cargo</Label>
@@ -180,7 +180,7 @@ const Personal = () => {
                 onChange={(event)=>{
                   setCargo(event.target.value);
                 }}
-                id="Cargo" value={Cargo} name="Cargo" type="input" />
+                id="Cargo" value={Cargo} name="Cargo" type="input" placeholder="Ingrese el cargo o funciones que cumple el empleado"/>
               </FormGroup>
               {
                 editar?

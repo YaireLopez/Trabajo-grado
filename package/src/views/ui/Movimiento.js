@@ -316,7 +316,7 @@ const Movimiento = () => {
                 onChange={(event)=>{
                   setcant_Mov(event.target.value);
                 }}
-                id="cant_Mov" value={cant_Mov} name="cant_Mov" type="number" />
+                id="cant_Mov" value={cant_Mov} name="cant_Mov" type="number" placeholder='Ingrese la cantidad de unidades compradas' />
               </FormGroup>
               <FormGroup>
                 <Label for="val_unidad_Mov">Valor por unidad</Label>
@@ -324,7 +324,7 @@ const Movimiento = () => {
                 onChange={(event)=>{
                   setval_unidad_Mov(event.target.value);
                 }}
-                id="val_unidad_Mov" value={val_unidad_Mov} name="val_unidad_Mov" type="number" />
+                id="val_unidad_Mov" value={val_unidad_Mov} name="val_unidad_Mov" type="number" placeholder='Ingrese el precio por unidad' />
               </FormGroup>
               <FormGroup>
                 <Label for="val_Total_Mov">Valor Total del movimiento</Label>
@@ -332,7 +332,7 @@ const Movimiento = () => {
                 onChange={(event)=>{
                   setval_Total_Mov(event.target.value);
                 }}
-                id="val_Total_Mov" value={val_Total_Mov} name="val_Total_Mov" type="number" />
+                id="val_Total_Mov" value={val_Total_Mov} name="val_Total_Mov" type="number" placeholder='Ingrese el valor total pagado' />
               </FormGroup>
           </FormGroup>:id_CatMov_Mov === '2' && id_TipoMov_Mov === '2'?<FormGroup><FormGroup>
               <Label for="nombre_prod_Mov">Elija el Producto a restar del inventario</Label>
@@ -352,7 +352,7 @@ const Movimiento = () => {
                 onChange={(event)=>{
                   setcant_Mov(event.target.value);
                 }}
-                id="cant_Mov" value={cant_Mov} name="cant_Mov" type="number" />
+                id="cant_Mov" value={cant_Mov} name="cant_Mov" type="number" placeholder='Ingrese el número de unidades usadas' />
               </FormGroup>
               
           </FormGroup>: id_CatMov_Mov === '2' && id_TipoMov_Mov === '4'?<FormGroup><FormGroup>
@@ -382,7 +382,7 @@ const Movimiento = () => {
                 onChange={(event)=>{
                   setcant_Mov(event.target.value);
                 }}
-                id="cant_Mov" value={cant_Mov} name="cant_Mov" type="number" />
+                id="cant_Mov" value={cant_Mov} name="cant_Mov" type="number" placeholder='Ingrese el número de unidades vendidas' />
               </FormGroup>
               <FormGroup>
                 <Label for="val_unidad_Mov">Valor por unidad</Label>
@@ -390,7 +390,7 @@ const Movimiento = () => {
                 onChange={(event)=>{
                   setval_unidad_Mov(event.target.value);
                 }}
-                id="val_unidad_Mov" value={val_unidad_Mov} name="val_unidad_Mov" type="number" />
+                id="val_unidad_Mov" value={val_unidad_Mov} name="val_unidad_Mov" type="number" placeholder='Ingrese el precio de venta de cada unidad'/>
               </FormGroup>
               <FormGroup>
                 <Label for="val_Total_Mov">Valor Total del movimiento</Label>
@@ -398,7 +398,7 @@ const Movimiento = () => {
                 onChange={(event)=>{
                   setval_Total_Mov(event.target.value);
                 }}
-                id="val_Total_Mov" value={val_Total_Mov} name="val_Total_Mov" type="number" />
+                id="val_Total_Mov" value={val_Total_Mov} name="val_Total_Mov" type="number" placeholder='Ingrese el valor total de la venta'/>
               </FormGroup>
           </FormGroup>
           : id_CatMov_Mov === '3' ? <FormGroup>
@@ -418,15 +418,15 @@ const Movimiento = () => {
                 onChange={(event)=>{
                   setcant_Mov(event.target.value);
                 }}
-                id="cant_Mov" value={cant_Mov} name="cant_Mov" type="number" />
+                id="cant_Mov" value={cant_Mov} name="cant_Mov" type="number" placeholder='Digite la cantidad de unidades' />
               </FormGroup>
               <FormGroup>
-                <Label for="val_unidad_Mov">Valor por empleado</Label>
+                <Label for="val_unidad_Mov">Valor por unidad</Label>
                 <Input
                 onChange={(event)=>{
                   setval_unidad_Mov(event.target.value);
                 }}
-                id="val_unidad_Mov" value={val_unidad_Mov} name="val_unidad_Mov" type="number" />
+                id="val_unidad_Mov" value={val_unidad_Mov} name="val_unidad_Mov" type="number" placeholder='Digite el costo por unidad'/>
               </FormGroup>
               <FormGroup>
                 <Label for="val_Total_Mov">Valor total</Label>
@@ -434,7 +434,7 @@ const Movimiento = () => {
                 onChange={(event)=>{
                   setval_Total_Mov(event.target.value);
                 }}
-                id="val_Total_Mov" value={val_Total_Mov} name="val_Total_Mov" type="number" />
+                id="val_Total_Mov" value={val_Total_Mov} name="val_Total_Mov" type="number" placeholder='Digite el valor total de la transacción' />
               </FormGroup>
           </FormGroup> : id_CatMov_Mov === '4' ? <FormGroup>
           <FormGroup>
@@ -443,7 +443,7 @@ const Movimiento = () => {
                 onChange={(event)=>{
                   setcant_Mov(event.target.value);
                 }}
-                id="cant_Mov" value={cant_Mov} name="cant_Mov" type="number" />
+                id="cant_Mov" value={cant_Mov} name="cant_Mov" type="number" placeholder='Ingrese la cantidad de unidades'/>
               </FormGroup>
               <FormGroup>
                 <Label for="val_unidad_Mov">Valor por unidad</Label>
@@ -451,7 +451,7 @@ const Movimiento = () => {
                 onChange={(event)=>{
                   setval_unidad_Mov(event.target.value);
                 }}
-                id="val_unidad_Mov" value={val_unidad_Mov} name="val_unidad_Mov" type="number" />
+                id="val_unidad_Mov" value={val_unidad_Mov} name="val_unidad_Mov" type="number" placeholder='Ingrese el costo por unidad'/>
               </FormGroup>
               <FormGroup>
                 <Label for="val_Total_Mov">Valor Total del movimiento</Label>
@@ -459,7 +459,7 @@ const Movimiento = () => {
                 onChange={(event)=>{
                   setval_Total_Mov(event.target.value);
                 }}
-                id="val_Total_Mov" value={val_Total_Mov} name="val_Total_Mov" type="number" />
+                id="val_Total_Mov" value={val_Total_Mov} name="val_Total_Mov" type="number" placeholder='Ingrese el costo total de la transacción' />
               </FormGroup>
               <Label for="id_personalMov">Elija a la persona encargada</Label>
               <select value={id_personalMov} onChange={(event)=>{
@@ -478,7 +478,7 @@ const Movimiento = () => {
                 onChange={(event)=>{
                   setval_Total_Mov(event.target.value);
                 }}
-                id="val_Total_Mov" value={val_Total_Mov} name="val_Total_Mov" type="number" />
+                id="val_Total_Mov" value={val_Total_Mov} name="val_Total_Mov" type="number"placeholder='Ingrese el costo total de la transacción' />
               </FormGroup>
           }
             <FormGroup>
@@ -493,7 +493,7 @@ const Movimiento = () => {
                 onChange={(event)=>{
                   setcomentarioMov(event.target.value);
                 }}
-                id="comentarioMov" value={comentarioMov} name="comentarioMov" type="textarea" /></FormGroup>
+                id="comentarioMov" value={comentarioMov} name="comentarioMov" type="textarea" placeholder='Escriba comentarios sobre el movimiento realizado' /></FormGroup>
  
               
               {

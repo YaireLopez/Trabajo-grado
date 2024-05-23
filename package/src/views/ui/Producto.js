@@ -189,14 +189,14 @@ const Producto = () => {
                 onChange={(event)=>{
                   setnombre_prod(event.target.value);
                 }}
-                id="nombre_prod" value={nombre_prod} name="nombre_prod" type="input" />
+                id="nombre_prod" value={nombre_prod} name="nombre_prod" type="input" placeholder="Ingrese el nombre del nuevo producto a registrar"/>
               </FormGroup>
               <FormGroup>
                 <Label for="descripcion_prod">Descripción del producto</Label>
                 <Input
                 onChange={(event)=>{
                   setdescripcion_prod(event.target.value);
-                }} id="descripcion_prod" value={descripcion_prod} name="descripcion_prod" type="textarea" />
+                }} id="descripcion_prod" value={descripcion_prod} name="descripcion_prod" type="textarea" placeholder="Ingrese un comentario respecto al nuevo producto"/>
               </FormGroup>
               {
                 editar?

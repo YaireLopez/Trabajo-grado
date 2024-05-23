@@ -203,35 +203,35 @@ function Proveedor(){
                 onChange={(event)=>{
                   setNombre_proveedor(event.target.value);
                 }}
-                id="nombre_proveedor" value={nombre_Proveedor} name="nombre_proveedor" type="input" />
+                id="nombre_proveedor" value={nombre_Proveedor} name="nombre_proveedor" type="input" placeholder="Ingrese el nombre" />
               </FormGroup>
               <FormGroup>
-                <Label for="Telefono1">Telefono 1</Label>
+                <Label for="Telefono1">Teléfono 1</Label>
                 <Input 
                 onChange={(event)=>{
                   setTelefono1(event.target.value);
-                }}id="Telefono1" value={Telefono1} name="Telefono1" type="input" />
+                }}id="Telefono1" value={Telefono1} name="Telefono1" type="number" placeholder="Ingrese un número de teléfono"/>
               </FormGroup>
               
               <FormGroup>
-                <Label for="Telefono2">Telefono 2</Label>
+                <Label for="Telefono2">Teléfono 2</Label>
                 <Input
                 onChange={(event)=>{
                   setTelefono2(event.target.value);
-                }} id="Telefono2" value={Telefono2} name="Telefono2" type="input" />
+                }} id="Telefono2" value={Telefono2} name="Telefono2" type="number" placeholder="Ingrese un número de teléfono secundario"/>
                 <Label for="direc_prov">Dirección del proveedor</Label>
                 <Input
                 onChange={(event)=>{
                   setdirec_prov(event.target.value);
                 }}
-                id="direc_prov" value={direc_prov} name="direc_prov" type="input" />
+                id="direc_prov" value={direc_prov} name="direc_prov" type="input" placeholder="Ingrese la dirección del local"/>
               </FormGroup>
               <FormGroup>
                 <Label for="ciudad">Ciudad</Label>
                 <Input 
                 onChange={(event)=>{
                   setciudad(event.target.value);
-                }}id="ciudad" value={ciudad} name="ciudad" type="input" />
+                }}id="ciudad" value={ciudad} name="ciudad" type="input" placeholder="Ingrese la ciudad de la tienda"/>
               </FormGroup>
               
               <FormGroup>
@@ -239,7 +239,7 @@ function Proveedor(){
                 <Input
                 onChange={(event)=>{
                   setdescripcion_Prov(event.target.value);
-                }} id="descripcion_Prov" value={descripcion_Prov} name="descripcion_Prov" type="textarea" />
+                }} id="descripcion_Prov" value={descripcion_Prov} name="descripcion_Prov" type="textarea" placeholder="Ingrese algún comentario adicional que desee"/>
                 
               </FormGroup>
               {

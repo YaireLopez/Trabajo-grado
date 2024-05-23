@@ -164,7 +164,7 @@ const CatMovimiento = () => {
                 <Input 
                 onChange={(event)=>{
                   setnom_CatMov(event.target.value);
-                }}id="nom_CatMov" value={nom_CatMov} name="nom_CatMov" type="input" />
+                }}id="nom_CatMov" value={nom_CatMov} name="nom_CatMov" type="input" placeholder="Ingrese el nombre de la nueva categoría de movimiento"/>
               </FormGroup>
               <FormGroup>
                 <Label for="descripcion_CatMov">Descripcion de la categoría</Label>
@@ -172,7 +172,7 @@ const CatMovimiento = () => {
                 onChange={(event)=>{
                   setdescripcion_CatMov(event.target.value);
                 }}
-                id="descripcion_CatMov" value={descripcion_CatMov} name="descripcion_CatMov" type="textarea" />
+                id="descripcion_CatMov" value={descripcion_CatMov} name="descripcion_CatMov" type="textarea" placeholder="Agregue una breve explicación de que consta esta nueva categoría" />
               </FormGroup>
               {
                 editar?

@@ -8,44 +8,19 @@ import {
 } from "reactstrap";
 
 const Inventario = () => {
-  const [CompraProd, setCompraProd] = useState([]);
-  const [VentaUsoProd, setVentaUsoProd] = useState([]);
-  const [stock, setstock] = useState();
+  const [StockProductos, setStockProductos] = useState([]);
   
   useEffect(()=>{
-    fetch('http://localhost:3001/ProdCompras')
+    fetch('http://localhost:3001/stockProductos')
     .then((res)=>{
       return res.json();
     })
     .then((data)=>{
       console.log(data);
-      setCompraProd(data);
+      setStockProductos(data);
     });
   },[]);
-  const CalcularStock = (val) =>{
-    useEffect(()=>{
-      fetch('http://localhost:3001/ProdCompras')
-      .then((res)=>{
-        return res.json();
-      })
-      .then((data)=>{
-        console.log(data);
-        setCompraProd(data);
-      });
-    },[]);
-    
-  }
-  useEffect(()=>{
-    fetch('http://localhost:3001/ProdVentasUso')
-    .then((res)=>{
-      return res.json();
-    })
-    .then((data)=>{
-      console.log(data);
-      setVentaUsoProd(data);
-    });
-  },[]);
-  return (
+   return (
     <Card>
           <CardBody>
             <h2>Inventario</h2>
@@ -58,13 +33,10 @@ const Inventario = () => {
               </thead>
               <tbody>
               {
-                CompraProd.map((val,key)=>{
+                StockProductos.map((val,key)=>{
                   return <tr>
                   <td>{val.nombre_prod_Mov}</td>
-                  <td>{CalcularStock(val)}</td>
-                  <td>
-                  
-                  </td>
+                  <td>{val.total_movimiento}</td>
                 </tr>
                 })
               }
