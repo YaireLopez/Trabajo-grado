@@ -14,7 +14,9 @@ const db = mysql.createConnection({
     database:"db_tgproyecto"
 });
 
-app.post("/forms",(req,res)=>{
+app.post("/proveedor",(req,res)=>{
+
+   
     const nombre_Proveedor = req.body.nombre_Proveedor;
     const Telefono1 = req.body.Telefono1;
     const Telefono2 = req.body.Telefono2;
@@ -33,7 +35,7 @@ app.post("/forms",(req,res)=>{
     );
 });
 
-app.post("/grid",(req,res)=>{
+app.post("/producto",(req,res)=>{
     const fecha_prod = req.body.fecha_prod;
     const nombre_prod = req.body.nombre_prod;
     const descripcion_prod = req.body.descripcion_prod;
@@ -49,7 +51,7 @@ app.post("/grid",(req,res)=>{
     );
 });
 
-app.post("/Alerts",(req,res)=>{
+app.post("/Personal",(req,res)=>{
     const Nombre_Pers = req.body.Nombre_Pers;
     const Cargo = req.body.Cargo;
 
@@ -63,7 +65,7 @@ app.post("/Alerts",(req,res)=>{
     }
     );
 });
-app.post("/Tables",(req,res)=>{
+app.post("/catMovimiento",(req,res)=>{
     const nom_CatMov = req.body.nom_CatMov;
     const descripcion_CatMov = req.body.descripcion_CatMov;
 
@@ -77,7 +79,7 @@ app.post("/Tables",(req,res)=>{
     }
     );
 });
-app.post("/Cards",(req,res)=>{
+app.post("/movimiento",(req,res)=>{
     const id_producto_Mov = req.body.id_producto_Mov;
     const id_CatMov_Mov = req.body.id_CatMov_Mov;
     const fecha_Mov = req.body.fecha_Mov;
@@ -85,14 +87,18 @@ app.post("/Cards",(req,res)=>{
     const val_unidad_Mov = req.body.val_unidad_Mov;
     const val_Total_Mov = req.body.val_Total_Mov;
     const id_prov_Mov = req.body.id_prov_Mov;
+    const nombre_prod_Mov = req.body.nombre_prod_Mov;
     const id_TipoMov_Mov = req.body.id_TipoMov_Mov;
+    const comentarioMov = req.body.comentarioMov;
     const id_personalMov = req.body.id_personalMov;
+    
 
-    db.query('INSERT INTO movimiento(id_producto_Mov,id_CatMov_Mov,fecha_Mov,cant_Mov,val_unidad_Mov,val_Total_Mov,id_prov_Mov,id_TipoMov_Mov,id_personalMov) VALUES(?,?,?,?,?,?,?,?,?)', [id_producto_Mov,id_CatMov_Mov,fecha_Mov,cant_Mov,val_unidad_Mov,val_Total_Mov,id_prov_Mov,id_TipoMov_Mov,id_personalMov],
+    db.query('INSERT INTO movimiento(id_producto_Mov,id_CatMov_Mov,fecha_Mov,cant_Mov,val_unidad_Mov,val_Total_Mov,id_prov_Mov,id_TipoMov_Mov,id_personalMov,comentarioMov,nombre_prod_Mov) VALUES(?,?,?,?,?,?,?,?,?,?,?)', [id_producto_Mov,id_CatMov_Mov,fecha_Mov,cant_Mov,val_unidad_Mov,val_Total_Mov,id_prov_Mov,id_TipoMov_Mov,id_personalMov,comentarioMov,nombre_prod_Mov],
     (err,result)=>{
         if(err){
             console.log(err);
         }else{
+            console.log(result);
             res.send(result);
         }
     }
@@ -164,6 +170,31 @@ app.get("/infoTipoMovimiento",(req,res)=>{
     }
     );
 });
+
+
+app.get("/stockProductos",(req,res)=>{
+    db.query('SELECT nombre_prod_Mov,SUM(CASE WHEN id_TipoMov_Mov = 3 THEN cant_Mov ELSE 0 END) - SUM(CASE WHEN id_TipoMov_Mov = 2 THEN cant_Mov ELSE 0 END) AS total_movimiento FROM movimiento GROUP BY nombre_prod_Mov;',
+    (err,result)=>{
+        if(err){
+            console.log(err);
+        }else{
+            res.send(result);
+        }
+    }
+    );
+});
+app.get("/TotalGastado",(req,res)=>{
+    db.query('SELECT SUM(val_Total_Mov) as Total FROM movimiento WHERE id_TipoMov_Mov = 3;',
+    (err,result)=>{
+        if(err){
+            console.log(err);
+        }else{
+            res.send(result);
+        }
+    }
+    );
+});
+
 app.get("/infoMovimiento",(req,res)=>{
     db.query('SELECT * FROM movimiento',
     (err,result)=>{
@@ -263,18 +294,27 @@ app.put("/updateCatMovimiento",(req,res)=>{
     );
 });
 app.put("/updateMovimiento",(req,res)=>{
+    
+    const id_TipoMov_Mov = req.body.id_TipoMov_Mov;
+    const id_CatMov_Mov = req.body.id_CatMov_Mov;
+    const id_producto_Mov = req.body.id_producto_Mov;
+    const id_prov_Mov = req.body.id_prov_Mov;
+    const id_personalMov = req.body.id_personalMov;       
+    const comentarioMov = req.body.comentarioMov;
     const id_Movimiento = req.body.id_CatMov;
     const fecha_Mov = req.body.fecha_Mov;
     const cant_Mov = req.body.cant_Mov;
     const val_unidad_Mov = req.body.val_unidad_Mov;
     const val_Total_Mov = req.body.val_Total_Mov;
 
-    db.query('UPDATE movimiento SET fecha_Mov=?,cant_Mov=?,val_unidad_Mov=?,val_Total_Mov=? WHERE id_Movimiento=?', [fecha_Mov,cant_Mov,val_unidad_Mov,val_Total_Mov,id_Movimiento],
+    db.query('UPDATE movimiento SET id_producto_Mov=?,id_CatMov_Mov=?,fecha_Mov=?,cant_Mov=?,val_unidad_Mov=?,val_Total_Mov=?,id_prov_Mov=?,id_TipoMov_Mov=?,id_personalMov=?,comentarioMov=? WHERE id_Movimiento=?', [id_producto_Mov,id_CatMov_Mov,fecha_Mov,cant_Mov,val_unidad_Mov,val_Total_Mov,id_prov_Mov,id_TipoMov_Mov,id_personalMov,comentarioMov,id_Movimiento],
     (err,result)=>{
         if(err){
             console.log(err);
         }else{
+            console.log(result);
             res.send(result);
+            
         }
     }
     );
