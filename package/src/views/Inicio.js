@@ -55,9 +55,7 @@ const Inicio = () => {
             earning="$21k"
             icon="bi bi-wallet"
           />
-        </Col>
-        
-        
+        </Col>       
        
       </Row>
       {/***Sales & Feed***/}
